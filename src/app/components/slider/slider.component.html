@@ -1,0 +1,41 @@
+<section id="Slider" class="pad_top">
+  <swiper [navigation]="true" class="mySwiper">
+    <ng-template swiperSlide>
+      <div class="container">
+        <div class="row g-4 justify-content-center align-items-center">
+          <div class="col-md-5 col-10">
+            <div class="heading">
+              <span>We represent</span>
+              <h1>LONDON STREET STYLE</h1>
+              <a class="btn" routerLink="/shop">Shop Now</a>
+            </div>
+          </div>
+          <div class="col-md-5 col-10 d-md-block d-none">
+            <div class="image">
+              <img class="w-100" src="../../../assets/imgs/slide.png" alt="LONDON STREET Style image" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template swiperSlide>
+      <div class="container">
+        <div class="row g-4 justify-content-center align-items-center">
+          <div class="col-md-5 col-10">
+            <div class="heading">
+              <span>The Jack & Jones Winter</span>
+              <h1>Collection</h1>
+              <a class="btn" routerLink="/shop">Shop Now</a>
+            </div>
+          </div>
+          <div class="col-md-5 col-10 d-md-block d-none">
+            <div class="image">
+              <img class="w-100" src="../../../assets/imgs/slide2.png" alt="Collection image" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </swiper>
+</section>

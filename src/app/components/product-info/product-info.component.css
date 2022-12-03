@@ -1,0 +1,66 @@
+#Pro_info .pro-img{
+  overflow: initial;
+  height: 350px;
+}
+#Pro_info .pro-info{
+  padding-left: 20px;
+}
+@media (max-width:767px) {
+  #Pro_info .pro-info{
+    padding-left: 0;
+  }
+}
+#Pro_info h2{
+  font-size: 35px;
+}
+#Pro_info .category a{
+  display: block;
+  margin: 10px 0;
+}
+#Pro_info .category a:hover{
+  text-decoration: underline !important;
+}
+#Pro_info .price{
+  margin: 25px 0;
+}
+#Pro_info .price span{
+  font-size: 36px;
+  color: var(--first-color);
+}
+
+#Pro_info .tools{
+  display: flex;
+  align-items: center;
+}
+
+#Pro_info .quantity span{
+  padding: 6px 20px;
+  font-size: 22px;
+  color: var(--whiteColor);
+  background-color: #333;
+  margin-right: 20px;
+}
+#Pro_info .btn{
+  border-radius: 0;
+  text-transform: uppercase;
+  background-color: var(--four-color);
+  color: var(--whiteColor) !important;
+  border: 1px solid var(--four-color);
+  transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  -ms-transition: all 0.4s;
+  -o-transition: all 0.4s;
+}
+#Pro_info .btn:hover:not(.add-to-wishlist .btn)
+{
+  color: var(--four-color) !important;
+  background-color: var(--whiteColor);
+}
+#Pro_info .add-to-wishlist{margin-top: 25px;}
+#Pro_info .add-to-wishlist .btn{
+  background-color: #333 !important;
+}
+#Pro_info .add-to-wishlist .btn:hover{
+  background-color: var(--first-color) !important;
+}

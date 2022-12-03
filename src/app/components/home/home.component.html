@@ -1,0 +1,197 @@
+
+<app-slider></app-slider>
+
+<section id="Trending_pro" class="py-5">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-12">
+        <h2>
+          TRENDING
+          <small>MOST TRENDY</small>
+        </h2>
+        <span class="dash"></span>
+      </div>
+
+      <div class="col-12 position-relative">
+        <owl-carousel-o [options]="customOptions">
+          <ng-container *ngFor="let product of trendingProducts">
+            <ng-template carouselSlide [id]="product.id">
+              <div class="product">
+
+                <div class="wishlist">
+                  <i [ngClass]="product.id ? (product.id | wishlistHeart) ? 'heart_active':'' : ''" class="fa-solid fa-heart"
+                    (click)="addToWishlist(product, $event); "
+                    placement="right" tooltipClass="my-custom-class right" ngbTooltip="Add to Wishlist"
+                  ></i>
+                </div>
+
+                <a class="pro-img" [routerLink]="['/product-info', product.id]">
+                  <span class="image_placholder">
+                    <img
+                      [src]="product.images[0]"
+                      [alt]="product.title"
+                    />
+                  </span>
+                  <span class="image_placholder image_loaded shop-image">
+                    <img
+                      [src]="product.images[1]"
+                      [alt]="product.title"
+                    />
+                  </span>
+                </a>
+
+                <div class="pro_info">
+                  <h3>
+                    <a [routerLink]="['/product-info', product.id]">{{ product.title}}</a>
+                  </h3>
+                  <span class="pro-cart" (click)="addToCart(product) ;" placement="left" tooltipClass="my-custom-class" ngbTooltip="Add to Cart" >
+                  </span>
+                  <span class="pro-category">
+                    <a [routerLink]="['/'+product.category.name.toLowerCase()]">{{ product.category.name}}</a>
+                  </span>
+                  <span class="pro-price">${{ product.price}}</span>
+                </div>
+              </div>
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="pro_Categories" class="py-5">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-12">
+        <h2>
+          SHOP CATEGORIES
+          <small>View All CATEGORIES</small>
+        </h2>
+        <span class="dash"></span>
+      </div>
+
+      <div class="col-12">
+        <div class="row g-4">
+          <div class="col-lg-3 col-sm-6">
+            <a [routerLink]="['/category/clothes']">
+              <div class="category position-relative overflow-hidden">
+                <div class="category_bg clothes"></div>
+                <div class="overlay"></div>
+                <div class="banner-text-container">
+                    <div class="banner-text-content">
+                      <strong>Clothes</strong>
+                    </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-lg-3 col-sm-6">
+            <a [routerLink]="['/category/shoes']">
+              <div class="category position-relative overflow-hidden">
+                <div class="category_bg shoes"></div>
+                <div class="overlay"></div>
+                <div class="banner-text-container">
+                    <div class="banner-text-content">
+                      <strong>Shoes</strong>
+                    </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-lg-3 col-sm-6">
+            <a [routerLink]="['/category/electronics']">
+              <div class="category position-relative overflow-hidden">
+                <div class="category_bg electronics"></div>
+                <div class="overlay"></div>
+                <div class="banner-text-container">
+                    <div class="banner-text-content">
+                      <strong>Electronics</strong>
+                    </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-lg-3 col-sm-6">
+            <a [routerLink]="['/category/furniture']">
+              <div class="category position-relative overflow-hidden">
+                <div class="category_bg furniture"></div>
+                <div class="overlay"></div>
+                <div class="banner-text-container">
+                    <div class="banner-text-content">
+                      <strong>Furniture</strong>
+                    </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="BestSeller_pro" class="py-5">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-12">
+        <h2>
+          BESTSELLERS
+          <small>MOST SOLD ITEMS IN THE MARKET</small>
+        </h2>
+        <span class="dash"></span>
+      </div>
+
+      <div class="col-12 position-relative">
+        <owl-carousel-o [options]="customOptions">
+          <ng-container *ngFor="let product of bestSellerProducts">
+            <ng-template carouselSlide [id]="product.id">
+              <div class="product">
+
+                <div class="wishlist">
+                  <i [ngClass]="product.id ? (product.id | wishlistHeart) ? 'heart_active':'' : ''" class="fa-solid fa-heart" (click)="addToWishlist(product, $event); "></i>
+                </div>
+
+                <a class="pro-img" [routerLink]="['/product-info', product.id]">
+                  <span class="image_placholder">
+                    <img
+                      [src]="product.images[0]"
+                      [alt]="product.title"
+                    />
+                  </span>
+                  <span class="image_placholder image_loaded shop-image">
+                    <img
+                      [src]="product.images[1]"
+                      [alt]="product.title"
+                    />
+                  </span>
+                </a>
+
+                <div class="pro_info">
+                  <h3>
+                    <a [routerLink]="['/product-info', product.id]">{{ product.title}}</a>
+                  </h3>
+                  <span class="pro-cart" (click)="addToCart(product); " placement="left" tooltipClass="my-custom-class" ngbTooltip="Add to Cart" >
+                  </span>
+                  <span class="pro-category">
+                    <a [routerLink]="['/'+product.category.name.toLowerCase()]">{{ product.category.name}}</a>
+                  </span>
+                  <span class="pro-price">${{ product.price}}</span>
+                </div>
+              </div>
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+      </div>
+
+    </div>
+  </div>
+</section>

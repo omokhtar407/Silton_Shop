@@ -1,1 +1,349 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&family=Roboto:wght@300&display=swap');
+/* Start */
+:root{
+    --first-color:#222;
+    --second-color:#888;
+    --third-color:#eee;
+    --four-color:#7b599b;
+    --four-color-50:#7b599b8a;
+    --four-color-80:#7b599bc6;
+    --five-color:#4d4d4d;
+    --whiteColor:#fff;
+    --whiteColor_50:rgb(255, 255, 255,0.5);
+    --blackColor:#000;
+    --blackColor_50:rgba(0, 0, 0, 0.5);
+    --main-font-family:'Roboto', sans-serif;
+    --second-font-family:'Roboto Condensed', sans-serif;
+  }
+
+body{
+    font-family: var(--second-font-family);
+    background-color: var(--whiteColor);
+    color: var(--blackColor);
+    text-transform: uppercase;
+}
+body::-webkit-scrollbar,
+.offcanvas-body::-webkit-scrollbar,
+.modal::-webkit-scrollbar {
+  width: 0.8rem;
+}
+body::-webkit-scrollbar-track,
+.offcanvas-body::-webkit-scrollbar-track,
+.modal::-webkit-scrollbar-track  {
+  background: var(--four-color-50);
+}
+body::-webkit-scrollbar-thumb,
+.offcanvas-body::-webkit-scrollbar-thumb,
+.modal::-webkit-scrollbar-thumb {
+  background-color: var(--four-color);
+  border: 3px solid var(--four-color);
+}
+a{
+  text-decoration: none !important;
+  color: var(--five-color) !important;
+}
+::selection {
+  background-color: var(--four-color);
+  color: var(--whiteColor);
+}
+::-moz-selection {
+  background-color: var(--four-color);
+  color: var(--whiteColor);
+}
+.pad_top{
+  padding-top: 8rem;
+}
+/* End */
+/* Start Main Heading */
+h2{
+  margin: 0;
+  font-size: 30px;
+}
+h2 small{
+  font-size: 15px;
+  color: var(--second-color);
+  font-weight: 300;
+  display: block;
+  margin-top: 8px;
+}
+.dash{
+  position: relative;
+  display: inline-block;
+  margin-top: 20px;
+  width: 25px;
+  height: 2px;
+  background-color: var(--first-color);
+}
+/* End Main Heading */
+/* Start Product */
+.product{
+  position: relative;
+  margin: 0 20px;
+}
+@media (max-width:400px) {
+.product{
+    margin: 0px;
+  }
+}
+.pro_info {
+  position: relative;
+  padding: 2px 20px;
+  display: block;
+  text-transform: uppercase;
+}
+
+.pro_info .pro-cart{
+  position: absolute;
+  top: 23px;
+  right: 10px;
+}
+.pro_info .pro-cart:before{
+  position: relative;
+  font-family: 'Font Awesome 5 Free';
+  content: '\f07a';
+  font-weight: 900;
+  display: block;
+  font-size: 16px;
+  color: var(--first-color);
+  margin-right: 10px;
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  transition-duration: 300ms;
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  cursor: pointer;
+}
+/* Tooltip */
+.my-custom-class .tooltip-inner {
+  border-radius:0 ;
+  text-transform: uppercase;
+  background-color: var(--first-color);
+  position: relative;
+  font-size: 12px;
+  -webkit-border-radius:0 ;
+  -moz-border-radius:0 ;
+  -ms-border-radius:0 ;
+  -o-border-radius:0 ;
+}
+.my-custom-class .tooltip-inner::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  transform: translateY(-50%) rotate(45deg);
+  background-color: var(--first-color);
+  -webkit-transform: translateY(-50%) rotate(45deg);
+  -moz-transform: translateY(-50%) rotate(45deg);
+  -ms-transform: translateY(-50%) rotate(45deg);
+  -o-transform: translateY(-50%) rotate(45deg);
+}
+.right .tooltip-inner{width: 120px;}
+.right .tooltip-inner::before{
+  left: -2px;
+}
+/* End */
+  /* Start Pro_image */
+  .pro-img {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 350px;
+  }
+  .pro-img .image_placholder,
+  .pro-img img{
+    width: 100%;
+    height: 100%;
+  }
+  .pro-img .image_loaded,.wishlist{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 200ms cubic-bezier(.445,.05,.55,.95);
+  }
+    /* Start wishlist */
+    .wishlist{
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 12;
+    }
+    .wishlist .fa-heart{
+      font-size: 18px;
+      color: var(--whiteColor);
+      transition: all 0.3s;
+      -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+      -ms-transition: all 0.3s;
+      -o-transition: all 0.3s;
+  }
+    .wishlist .fa-heart:hover{
+      color: var(--first-color);
+      cursor: pointer;
+    }
+    .heart_active{
+      color: var(--first-color) !important;
+    }
+    /* End */
+  .pro-img:hover .shop-image ,
+  .product:hover .wishlist{
+    visibility: visible;
+    opacity: 1;
+  }
+  /* End Pro_image */
+
+  /* Start product info */
+  .pro_info h3{
+    font-size: 20px;
+    margin: 20px 25px 0 0;
+    font-weight: 300;
+    margin-bottom: 0;
+  }
+  .pro_info h3 a{
+    color: var(--first-color);
+  }
+  .pro_info span{
+    display: inline-block;
+    font-weight: 300;
+  }
+  .pro_info span a{
+    font-size: 12px;
+    color: var(--second-color);
+  }
+  .pro_info h3:hover a,
+  .pro_info span:hover a{
+  text-decoration: underline !important;
+  }
+  .pro_info .pro-category{
+    margin-top: 5px;
+  }
+  .pro_info .pro-price {
+    display: block;
+    color: #333;
+    margin: 20px 25px 0 0;
+    font-size: 20px;
+  }
+  /* End product info */
+/* End Product */
+/* Start owl-carousel */
+ .owl-carousel, .owl-carousel .owl-item{
+  position:initial;
+}
+ .owl-prev, .owl-next{
+  position: absolute;
+  top: 40%;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px ;
+  font-weight: bold;
+  transition: color 0.3s;
+  background-color: var(--first-color) !important;
+  width: 40px;
+  height: 40px;
+  border-radius: 50% !important;
+  z-index: 100;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  -ms-border-radius: 50% !important;
+  -o-border-radius: 50% !important;
+}
+ .owl-next{
+  right: 5px;
+}
+ .owl-prev{
+  left: 5px;
+}
+ .owl-prev i, .owl-next i{
+  font-size: 20px;
+}
+@media (max-width:767px) {
+   .owl-prev i, .owl-next i{
+    font-size: 1.2rem;
+  }
+}
+@media (max-width:400px) {
+   .owl-prev,
+   .owl-next{
+    display: none;
+  }
+}
+/*End owl-carouse */
+/* Start Sorting button */
+.sorting .btn{
+  color: #888;
+  position: relative;
+  padding: 8px 10px;
+  border: 1px solid #eee;
+  text-align: left;
+  background: #fff;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+
+}
+.sorting .btn:hover {
+  border-color: #ccc;
+}
+.sorting .dropdown-toggle{width: 100%;}
+.sorting .dropdown-toggle::after {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateX(-50%);
+  margin-right: 0.255em;
+}
+
+.sorting .dropdown-menu {
+  width: 100%;
+  padding: 0;
+  border-radius: 0;
+  font-size: 14px;
+  box-shadow: 0 1px 1px 0 rgb(0 0 0 / 5%);
+}
+.sorting .dropdown-item {
+  color: #333;
+  font-weight: 300;
+  padding: 8px 15px;
+  text-transform: capitalize;
+}
+.sorting .dropdown-item.active,
+.sorting .dropdown-item:active{
+  color: #fff !important;
+  outline: 0;
+  background-color: #222 !important;
+}
+/* End Sorting button */
+
+/* Start SweetAlert */
+.swal2-popup {
+  border-radius: 0 !important;
+  -webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  -ms-border-radius: 0 !important;
+  -o-border-radius: 0 !important;
+}
+.swal2-styled.swal2-confirm {
+  border-radius: 0 !important;
+  background-color: var(--four-color) !important;
+  color: var(--whiteColor);
+  -webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  -ms-border-radius: 0 !important;
+  -o-border-radius: 0 !important;
+}
+.swal2-styled.swal2-confirm:focus {
+  box-shadow: 0 0 0 3px rgb(103 58 183 / 39%) !important;
+}
+/* End */
+

@@ -1,0 +1,145 @@
+<section>
+  <!-- Start Footer -->
+  <footer class="pt-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6">
+          <div class="item">
+            <div class="logo mb-4">
+              <a routerLink="">
+                <img src="assets/imgs/logo.png" alt="logo" />
+              </a>
+            </div>
+            <div class="footer_contact_text mb-2">
+              17 Princess Road, London Grester London NW18JR, UK
+            </div>
+            <div class="footer_email mb-3">omokhtar407@gmail.com</div>
+            <div class="footer_social d-flex">
+              <a href="https://www.facebook.com/profile.php?id=100028305347519">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/omar-mokhtar-737536200">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a href="https://github.com/omokhtar407"
+                ><i class="fab fa-github"></i>
+              </a>
+              <a href="http://wa.me/+201145466042"
+                ><i class="fab fa-whatsapp"></i>
+              </a>
+              <a href="mailto:omokhar407@gmail.com"
+                ><i class="fas fa-envelope-square"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="item">
+            <h3 class="h6 mb-3">Find it Fast</h3>
+            <ul class="list-unstyled">
+              <li><a routerLink="/category/clothes">Clothes</a></li>
+              <li><a routerLink="/category/electronics">Electronics</a></li>
+              <li><a routerLink="/category/shoes">Shoes</a></li>
+              <li><a routerLink="/category/furniture">Furniture</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="item">
+            <h3 class="h6 mb-3">Customer Care</h3>
+            <ul class="list-unstyled">
+              <li><a routerLink="">My Account</a></li>
+              <li><a routerLink="">Order Tracking</a></li>
+              <li><a routerLink="/wishlist">WishList</a></li>
+              <li><a routerLink="">Customer Services</a></li>
+              <li><a routerLink="">Product Support</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="item">
+            <h3 class="h6 mb-3">Sign up for Newsletter</h3>
+            <p>
+              Subscribe to our news system now to get last news from us
+            </p>
+            <form [formGroup]="submitForm" (ngSubmit)="SubmitForm(submitForm)">
+              <div class="group mb-2">
+                <input
+                  formControlName="email"
+                  class="form-control mb-2 rounded-0"
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Enter your email"
+                />
+                <div
+                  *ngIf="
+                    submitForm.get('email')?.errors != null &&
+                    submitForm.get('email')?.touched
+                  "
+                  class="text-danger"
+                >
+                  <p *ngIf="submitForm.get('email')?.errors?.required">
+                    Email is required
+                  </p>
+                  <p *ngIf="submitForm.get('email')?.errors?.email">
+                    Email is invalid
+                  </p>
+                </div>
+              </div>
+              <button class="btn" type="submit" [disabled]="submitForm.invalid" (click)="sweetAlert('Thanks for Your Subscription')">
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <!-- Start Copyright  -->
+  <div class="copyright mt-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-8">
+          <p class="mb-0">
+            Copyright &copy; {{Year}} All rights reserved | This template is made by
+            <a
+              class="triple"
+              href="https://omokhtar407.github.io/Master_Portfolio/"
+              >OmAr El-MoKhTaR</a
+            >
+          </p>
+        </div>
+        <div class="col-md-4">
+          <div class="pay">
+            <ul class="list-unstyled d-flex justify-content-md-end mb-0">
+              <li>
+                <a routerLink="" class="me-3">
+                  <img src="../../../assets/imgs/footer/footer1.webp" alt="mastercard img" />
+                </a>
+              </li>
+              <li>
+                <a routerLink="" class="me-3"
+                  ><img src="../../../assets/imgs/footer/footer2.webp" alt="Paypal img"
+                /></a>
+              </li>
+              <li>
+                <a routerLink="" class="me-3"
+                  ><img src="../../../assets/imgs/footer/footer3.webp" alt="Visa img"
+                /></a>
+              </li>
+              <li>
+                <a routerLink=""
+                  ><img src="../../../assets/imgs/footer/footer4.webp" alt="mastercard2 img"
+                /></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Copyright  -->
+</section>
