@@ -24,16 +24,19 @@ body{
     overflow-x: hidden;
 }
 body::-webkit-scrollbar,
+.row::-webkit-scrollbar,
 .offcanvas-body::-webkit-scrollbar,
 .modal::-webkit-scrollbar {
   width: 0.8rem;
 }
 body::-webkit-scrollbar-track,
+.row::-webkit-scrollbar-track,
 .offcanvas-body::-webkit-scrollbar-track,
 .modal::-webkit-scrollbar-track  {
   background: var(--four-color-50);
 }
 body::-webkit-scrollbar-thumb,
+.row::-webkit-scrollbar-thumb,
 .offcanvas-body::-webkit-scrollbar-thumb,
 .modal::-webkit-scrollbar-thumb {
   background-color: var(--four-color);
