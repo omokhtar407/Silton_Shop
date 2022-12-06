@@ -3,6 +3,8 @@ import { CartServicesService } from './../../services/cart-services.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { Product } from 'src/model/product';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-product-info',
   templateUrl: './product-info.component.html',
@@ -10,13 +12,27 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 })
 export class ProductInfoComponent implements OnInit {
   productId: number = 0;
-  product: any = {};
-  products: any[] = [];
+  product: Product = {
+    category: {
+      id: 0,
+      image: '',
+      name: '',
+    },
+    description: '',
+    id: '',
+    images: [],
+    price: 0,
+    quantity: 0,
+    title: '',
+    total: 0,
+  };
+  products: Product[] = [];
 
   constructor(
     private _ActivatedRoute: ActivatedRoute,
     private _WishlistService: WishlistService,
-    private _CartService: CartServicesService
+    private _CartService: CartServicesService,
+    private _NgxSpinnerService: NgxSpinnerService
   ) {}
 
   customOptions: OwlOptions = {
@@ -46,42 +62,46 @@ export class ProductInfoComponent implements OnInit {
 
   getProduct() {
     this._ActivatedRoute.data.subscribe((response: any) => {
+      setTimeout(()=>{
+        this._NgxSpinnerService.hide();
+      },2000)
       this.product = response.product;
-        Object.assign(this.product, { quantity: 1, total: this.product.price });
-        this.getRelatedProducts(this.product.category.name)
+      Object.assign(this.product, { quantity: 1, total: this.product.price });
+      this.getRelatedProducts(this.product.category.name);
     });
   }
 
-  getRelatedProducts(cateName:any) {
-
+  getRelatedProducts(cateName: string) {
     this._ActivatedRoute.data.subscribe((response: any) => {
-      this.products = response.products.slice(0, 25).filter((pro: any) => {
+      this.products = response.products.slice(0, 25).filter((pro: Product) => {
         return pro.category.name === cateName;
       });
 
-      this.products.forEach((pro: any) => {
+      this.products.forEach((pro: Product) => {
         Object.assign(pro, { quantity: 1, total: pro.price });
       });
+
     });
   }
 
-  addToCart(pro: any) {
+  addToCart(pro: Product) {
     this._CartService.addToCart(pro);
   }
 
   //this function For product button
-  addToWishlist(pro: any) {
+  addToWishlist(pro: Product) {
     this._WishlistService.addToWishlist(pro);
   }
 
   // this function for related products
-  addToWishlist2(pro: any, event: any) {
+  addToWishlist2(pro: Product, event: any) {
     let heart = event.target;
     heart.classList.add('heart_active');
     this._WishlistService.addToWishlist(pro);
   }
 
   ngOnInit(): void {
+    this._NgxSpinnerService.show();
     this.getProduct();
   }
 }

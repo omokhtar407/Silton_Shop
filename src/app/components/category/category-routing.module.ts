@@ -5,7 +5,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { ElectronicsComponent } from './electronics/electronics.component';
 import { ShoesComponent } from './shoes/shoes.component';
 import { FurnitureComponent } from './furniture/furniture.component';
-import { AuthGuard } from 'src/app/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'clothes', pathMatch: 'full' },

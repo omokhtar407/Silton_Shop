@@ -1,8 +1,10 @@
+import { Product } from 'src/model/product';
+import { sweetAlertError } from 'src/sweetalert';
 import { ActivatedRoute } from '@angular/router';
 import { WishlistService } from '../../../services/wishlist.service';
 import { CartServicesService } from '../../../services/cart-services.service';
-import { ShopServicesService } from '../../../services/shop-services.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-furniture',
   templateUrl: './furniture.component.html',
@@ -10,34 +12,44 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None,
 })
 export class FurnitureComponent implements OnInit {
-  furnitureProducts: any[] = [];
+  furnitureProducts: Product[] = [];
   constructor(
     private _CartServices: CartServicesService,
     private _WishlistService: WishlistService,
-    private _ActivatedRoute: ActivatedRoute
+    private _ActivatedRoute: ActivatedRoute,
+    private _NgxSpinnerService: NgxSpinnerService
   ) {}
 
-  addToCart(pro: any) {
+  addToCart(pro: Product) {
     this._CartServices.addToCart(pro);
   }
 
-  addToWishlist(pro: any, event: any) {
+  addToWishlist(pro: Product, event: any) {
     let heart = event.target;
     heart.classList.add('heart_active');
     this._WishlistService.addToWishlist(pro);
   }
 
   ngOnInit(): void {
-
+    this._NgxSpinnerService.show();
     this._ActivatedRoute.data.subscribe((response: any) => {
-      // Get furnitureProducts
-      this.furnitureProducts = response.products.slice(0, 100).filter((pro: any) => {
-        return pro.category.name == 'Furniture';
-      });
-      this.furnitureProducts.forEach((pro: any) => {
-        Object.assign(pro, { quantity: 1, total: pro.price });
-      });
-      // End
+      setTimeout(()=>{
+        this._NgxSpinnerService.hide();
+      },2000);
+      if (response.products != `No data`) {
+        // Get furnitureProducts
+        this.furnitureProducts = response.products
+          .slice(0, 100)
+          .filter((pro: Product) => {
+            return pro.category.name == 'Furniture';
+          });
+        this.furnitureProducts.forEach((pro: Product) => {
+          Object.assign(pro, { quantity: 1, total: pro.price });
+        });
+        // End
+      } else {
+        sweetAlertError('No Furniture Available Now');
+      }
     });
   }
 }

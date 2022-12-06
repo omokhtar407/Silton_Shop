@@ -1,3 +1,12 @@
+<ngx-spinner
+  bdColor="rgba(255, 255, 255)"
+  size="medium"
+  color="#7b599b"
+  type="square-loader"
+  [fullScreen]="true"
+  ><p>Loading...</p></ngx-spinner
+>
+
 <section id="Shop_pro" class="pad_top">
   <div class="container">
     <div class="row g-4 justify-content-center">
@@ -13,7 +22,7 @@
               <span class="dash"></span>
             </div>
           </div>
-          <div class="col-md-4">
+          <!-- <div class="col-md-4">
             <div class="sorting">
               <div class="dropdown">
                 <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -25,7 +34,7 @@
                 </ul>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
 
 
@@ -36,7 +45,7 @@
           <div class="col-lg-3 col-md-4 col-sm-6"  *ngFor="let product of Products" data-price="">
             <div class="product">
               <div class="wishlist">
-                <i [ngClass]="product.id ? (product.id | wishlistHeart) ? 'heart_active':'' : ''" class="fa-solid fa-heart" (click)="addToWishlist(product, $event);  "></i>
+                <i [ngClass]="product.id ? (product.id | proWishlist) ? 'heart_active':'' : ''" class="fa-solid fa-heart" (click)="addToWishlist(product, $event);  "></i>
               </div>
 
               <a class="pro-img" [routerLink]="['/product-info', product.id]">
@@ -48,7 +57,7 @@
                 </span>
                 <span class="image_placholder image_loaded shop-image">
                   <img
-                    [src]="product.images[2]"
+                    [src]="product.images[1]"
                     [alt]="product.title"
                   />
                 </span>

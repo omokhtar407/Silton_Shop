@@ -1,8 +1,11 @@
+import { sweetAlertError } from 'src/sweetalert';
 import { ActivatedRoute } from '@angular/router';
 import { WishlistService } from './../../services/wishlist.service';
 import { CartServicesService } from './../../services/cart-services.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { Product } from 'src/model/product';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -10,13 +13,14 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  trendingProducts: any[] = [];
-  bestSellerProducts: any[] = [];
+  trendingProducts: Product[] = [];
+  bestSellerProducts: Product[] = [];
 
   constructor(
     private _WishlistService: WishlistService,
     private _CartServices: CartServicesService,
-    private _ActivatedRoute: ActivatedRoute
+    private _ActivatedRoute: ActivatedRoute,
+    private _NgxSpinnerService: NgxSpinnerService
   ) {}
 
   customOptions: OwlOptions = {
@@ -44,39 +48,48 @@ export class HomeComponent implements OnInit {
     },
   };
 
-  addToCart(pro: any) {
+  addToCart(pro: Product) {
     this._CartServices.addToCart(pro);
   }
 
-  addToWishlist(pro: any, event: any) {
+  addToWishlist(pro: Product, event: any) {
     let heart = event.target;
     heart.classList.add('heart_active');
     this._WishlistService.addToWishlist(pro);
   }
 
   ngOnInit(): void {
-
+    this._NgxSpinnerService.show();
     this._ActivatedRoute.data.subscribe((response: any) => {
 
-      // Trending Products
-        this.trendingProducts = response.products.slice(0, 25).filter((pro: any) => {
-                return pro.category.name != 'Others';
-        });
+      setTimeout(()=>{
+        this._NgxSpinnerService.hide();
+      },2000)
 
-        this.trendingProducts.forEach((pro: any) => {
+      if (response.products != `No data`) {
+        // Trending Products
+        this.trendingProducts = response.products
+          .slice(0, 25)
+          .filter((pro: Product) => {
+            return pro.category.name != 'Others';
+          });
+        this.trendingProducts.forEach((pro: Product) => {
           Object.assign(pro, { quantity: 1, total: pro.price }); // add two properties to product
         });
-      // End
-      // BestSeller Products
-        this.bestSellerProducts = response.products.slice(25, 45).filter((pro: any) => {
-          return pro.category.name != 'Others';
+        // End
+        // BestSeller Products
+        this.bestSellerProducts = response.products
+          .slice(25, 45)
+          .filter((pro: Product) => {
+            return pro.category.name != 'Others';
         });
-        this.bestSellerProducts.forEach((pro: any) => {
+        this.bestSellerProducts.forEach((pro: Product) => {
           Object.assign(pro, { quantity: 1, total: pro.price });
         });
-      // End
-
+        // End
+      } else {
+        sweetAlertError('No Products Available Now');
+      }
     });
-
   }
 }

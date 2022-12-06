@@ -1,3 +1,11 @@
+<ngx-spinner
+  bdColor="rgba(255, 255, 255)"
+  size="medium"
+  color="#7b599b"
+  type="square-loader"
+  [fullScreen]="true"
+  ><p>Loading...</p></ngx-spinner
+>
 <section id="Pro_info" class="pad_top">
   <div class="container">
     <div class="row g-4">
@@ -21,20 +29,18 @@
             <span>${{ product.price }}</span>
           </div>
           <div class="tools">
-            <div class="quantity">
-              <span>{{ product.quantity }}</span>
-            </div>
             <div class="add-to-cart">
               <button class="btn" (click)="addToCart(product);">
                 <i class="fa-sharp fa-solid fa-cart-shopping me-2"></i>  Add To Cart
               </button>
             </div>
+            <div class="add-to-wishlist">
+              <button class="btn" (click)="addToWishlist(product);">
+                <i class="fa-regular fa-heart me-2"></i>  Add To Wishlist
+              </button>
+            </div>
           </div>
-          <div class="add-to-wishlist">
-            <button class="btn" (click)="addToWishlist(product);">
-              <i class="fa-regular fa-heart me-2"></i>  Add To Wishlist
-            </button>
-          </div>
+
         </div>
       </div>
     </div>
@@ -52,13 +58,13 @@
         <span class="dash"></span>
       </div>
 
-      <div class="col-12 position-relative">
+      <div *ngIf="products.length != 0" class="col-12 position-relative">
         <owl-carousel-o [options]="customOptions">
           <ng-container *ngFor="let product of products">
             <ng-template carouselSlide [id]="product.id">
               <div class="product">
                 <div class="wishlist">
-                  <i [ngClass]="product.id ? (product.id | wishlistHeart) ? 'heart_active':'' : ''" class="fa-solid fa-heart" (click)="addToWishlist2(product, $event);  "></i>
+                  <i [ngClass]="product.id ? (product.id | proWishlist) ? 'heart_active':'' : ''" class="fa-solid fa-heart" (click)="addToWishlist2(product, $event);  "></i>
                 </div>
 
                 <a class="pro-img" [routerLink]="['/product-info', product.id]" (click)="getProduct()">
@@ -94,6 +100,9 @@
         </owl-carousel-o>
       </div>
 
+      <div *ngIf="products.length == 0" class="col-12">
+        <p class="fs-4 text-center">No Related Products Available Now</p>
+      </div>
     </div>
   </div>
 </section>

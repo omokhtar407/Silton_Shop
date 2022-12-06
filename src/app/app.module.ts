@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-// import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxSpinnerModule } from "ngx-spinner";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -19,8 +19,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
-import { WishlistHeartPipe } from './wishlist-heart.pipe';
 import { SwiperModule } from "swiper/angular";
+import { PipesModule } from 'src/pipes/pipes.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +35,6 @@ import { SwiperModule } from "swiper/angular";
     LoginComponent,
     NotfoundComponent,
     WishlistComponent,
-    WishlistHeartPipe,
   ],
   imports: [
     BrowserModule,
@@ -45,8 +44,10 @@ import { SwiperModule } from "swiper/angular";
     ReactiveFormsModule,
     BrowserAnimationsModule,
     CarouselModule,
-    NgbModule,SwiperModule
-    // NgxSpinnerModule
+    NgbModule,
+    SwiperModule,
+    PipesModule,
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

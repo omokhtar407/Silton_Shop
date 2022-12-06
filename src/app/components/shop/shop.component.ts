@@ -1,7 +1,10 @@
+import { sweetAlertError } from 'src/sweetalert';
 import { ActivatedRoute } from '@angular/router';
 import { WishlistService } from './../../services/wishlist.service';
 import { CartServicesService } from './../../services/cart-services.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Product } from 'src/model/product';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-shop',
@@ -10,34 +13,46 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None,
 })
 export class ShopComponent implements OnInit {
-  Products: any[] = [];
+  Products: Product[] = [];
   constructor(
     private _CartServices: CartServicesService,
     private _WishlistService: WishlistService,
-    private _ActivatedRoute: ActivatedRoute
+    private _ActivatedRoute: ActivatedRoute,
+    private _NgxSpinnerService: NgxSpinnerService
   ) {}
 
-  addToCart(pro: any) {
+  addToCart(pro: Product) {
     this._CartServices.addToCart(pro);
   }
 
-  addToWishlist(pro: any, event: any) {
+  addToWishlist(pro: Product, event: any) {
     let heart = event.target;
     heart.classList.add('heart_active');
     this._WishlistService.addToWishlist(pro);
   }
 
   ngOnInit(): void {
+    this._NgxSpinnerService.show();
     this._ActivatedRoute.data.subscribe((response: any) => {
-      // Get Products
-        this.Products = response.products.slice(0, 30).filter((pro: any) => {
-          return pro.category.name != 'Others';
-        });
-        this.Products.forEach((pro: any) => {
+      
+      setTimeout(()=>{
+        this._NgxSpinnerService.hide();
+      },2000)
+
+      if (response.products != `No data`) {
+        // Get Products
+        this.Products = response.products
+          .slice(0, 30)
+          .filter((pro: Product) => {
+            return pro.category.name != 'Others';
+          });
+        this.Products.forEach((pro: Product) => {
           Object.assign(pro, { quantity: 1, total: pro.price });
         });
-      // End
+        // End
+      } else {
+        sweetAlertError('No Products Available Now');
+      }
     });
-
   }
 }
