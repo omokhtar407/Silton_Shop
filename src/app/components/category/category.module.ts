@@ -1,4 +1,4 @@
-import { NgxSpinnerModule } from 'ngx-spinner';
+
 import { NgModule } from '@angular/core';
 import { ClothesComponent } from './clothes/clothes.component';
 import { CommonModule } from '@angular/common';
@@ -19,7 +19,6 @@ import { PipesModule } from 'src/pipes/pipes.module';
     CommonModule,
     CategoryRoutingModule,
     PipesModule,
-    NgxSpinnerModule,
   ],
 })
 export class CategoryModule {}

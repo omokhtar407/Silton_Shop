@@ -4,7 +4,6 @@ import { CartServicesService } from '../../../services/cart-services.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { sweetAlertError } from 'src/sweetalert';
 import { Product } from 'src/model/product';
-import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-shoes',
   templateUrl: './shoes.component.html',
@@ -17,7 +16,6 @@ export class ShoesComponent implements OnInit {
     private _CartServices: CartServicesService,
     private _WishlistService: WishlistService,
     private _ActivatedRoute: ActivatedRoute,
-    private _NgxSpinnerService: NgxSpinnerService
   ) {}
 
   addToCart(pro: Product) {
@@ -31,13 +29,8 @@ export class ShoesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._NgxSpinnerService.show();
     this._ActivatedRoute.data.subscribe((response: any) => {
 
-      setTimeout(()=>{
-        this._NgxSpinnerService.hide();
-      },2000)
-      
       if (response.products != `No data`) {
         // Get shoesProducts
         this.shoesProducts = response.products

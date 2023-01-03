@@ -4,7 +4,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Product } from 'src/model/product';
-import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-product-info',
   templateUrl: './product-info.component.html',
@@ -32,7 +31,6 @@ export class ProductInfoComponent implements OnInit {
     private _ActivatedRoute: ActivatedRoute,
     private _WishlistService: WishlistService,
     private _CartService: CartServicesService,
-    private _NgxSpinnerService: NgxSpinnerService
   ) {}
 
   customOptions: OwlOptions = {
@@ -62,9 +60,6 @@ export class ProductInfoComponent implements OnInit {
 
   getProduct() {
     this._ActivatedRoute.data.subscribe((response: any) => {
-      setTimeout(()=>{
-        this._NgxSpinnerService.hide();
-      },2000)
       this.product = response.product;
       Object.assign(this.product, { quantity: 1, total: this.product.price });
       this.getRelatedProducts(this.product.category.name);
@@ -101,7 +96,6 @@ export class ProductInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._NgxSpinnerService.show();
     this.getProduct();
   }
 }

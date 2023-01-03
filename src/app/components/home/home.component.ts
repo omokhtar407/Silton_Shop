@@ -5,7 +5,6 @@ import { CartServicesService } from './../../services/cart-services.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Product } from 'src/model/product';
-import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -20,7 +19,6 @@ export class HomeComponent implements OnInit {
     private _WishlistService: WishlistService,
     private _CartServices: CartServicesService,
     private _ActivatedRoute: ActivatedRoute,
-    private _NgxSpinnerService: NgxSpinnerService
   ) {}
 
   customOptions: OwlOptions = {
@@ -59,13 +57,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._NgxSpinnerService.show();
     this._ActivatedRoute.data.subscribe((response: any) => {
-
-      setTimeout(()=>{
-        this._NgxSpinnerService.hide();
-      },2000)
-
       if (response.products != `No data`) {
         // Trending Products
         this.trendingProducts = response.products

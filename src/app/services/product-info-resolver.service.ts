@@ -7,6 +7,7 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { Injectable } from '@angular/core';
+import { sweetAlertError } from 'src/sweetalert';
 
 @Injectable({
   providedIn: 'root',
@@ -28,6 +29,7 @@ export class ProductInfoResolverService {
 
     return this._HttpClient.get(this.singProductUrl + this.productId).pipe(
       catchError((error) => {
+        sweetAlertError("No Data Found")
         return of('No data');
       })
     );

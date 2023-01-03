@@ -29,7 +29,6 @@ export class CartComponent implements OnInit {
         setTimeout(()=>{
           this._NgxSpinnerService.hide();
         },2000);
-
         this.products = res;
         this.grandTotal = this._CartService.getTotalPrice();
       },

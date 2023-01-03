@@ -1,3 +1,4 @@
+import { sweetAlertError } from 'src/sweetalert';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
@@ -22,6 +23,7 @@ export class ProductResolverService implements Resolve<Observable<any>> {
 
     return this._HttpClient.get(this.productsUrl).pipe(
       catchError((error) => {
+        sweetAlertError("No Data Found");
         return of('No data');
       })
     );

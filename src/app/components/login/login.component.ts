@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,10 +11,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class LoginComponent implements OnInit {
   constructor(
     private _AuthService: AuthService,
-    private _Router: Router,
-    private _NgxSpinnerService: NgxSpinnerService
+    private _Router: Router
   ) {
-    this._NgxSpinnerService.show();
   }
 
   loginForm: FormGroup = new FormGroup({
@@ -35,14 +32,11 @@ export class LoginComponent implements OnInit {
         }
       },
       (error) => {
-        sweetAlertError(error.error.message + ' ' + 'Check email or password');
+        sweetAlertError('Check email or password');
       }
     );
   }
 
   ngOnInit(): void {
-    setTimeout(()=>{
-      this._NgxSpinnerService.hide();
-    },1500)
   }
 }

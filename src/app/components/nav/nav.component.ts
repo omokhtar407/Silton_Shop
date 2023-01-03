@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { WishlistService } from './../../services/wishlist.service';
 import { AuthService } from './../../services/auth.service';
 import { CartServicesService } from './../../services/cart-services.service';
@@ -6,16 +7,20 @@ declare var $: any;
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css']
+  styleUrls: ['./nav.component.css'],
 })
 export class NavComponent implements OnInit {
-  totalCartPro:number = 0;
-  totalWishlistPro:number = 0;
+  totalCartPro: number = 0;
+  totalWishlistPro: number = 0;
   isLogin: boolean = false;
   isToggle: boolean = false;
 
-  constructor( private _CartService:CartServicesService,private _WishlistService:WishlistService ,private _AuthService:AuthService) {}
-
+  constructor(
+    private _CartService: CartServicesService,
+    private _WishlistService: WishlistService,
+    private _AuthService: AuthService,
+    private spinner:NgxSpinnerService
+  ) {}
 
   addCollapse() {
     $('button').next('.collapse').slideToggle(300);
@@ -27,26 +32,30 @@ export class NavComponent implements OnInit {
     this.isToggle = false;
   }
 
-  changeWebsiteToRed(){
-    const body = document.querySelector('body')
+  changeWebsiteToRed() {
+    const body = document.querySelector('body');
     body?.classList.remove('blue');
     body?.classList.remove('orange');
   }
-  changeWebsiteToBlue(){
-    const body = document.querySelector('body')
+  changeWebsiteToBlue() {
+    const body = document.querySelector('body');
     body?.classList.add('blue');
     body?.classList.remove('red');
     body?.classList.remove('orange');
   }
-  changeWebsiteToOrange(){
-    const body = document.querySelector('body')
+  changeWebsiteToOrange() {
+    const body = document.querySelector('body');
     body?.classList.add('orange');
     body?.classList.remove('red');
     body?.classList.remove('blue');
   }
 
   logOut() {
+    this.spinner.show();
     this._AuthService.logout();
+    setTimeout(() => {
+      this.spinner.hide();
+    },2000)
   }
 
   ngOnInit(): void {
@@ -58,23 +67,12 @@ export class NavComponent implements OnInit {
       }
     });
 
-    this._CartService.getProducts().subscribe(
-      (res)=>{
-        this.totalCartPro = res.length;
-      },
-      (error)=>{
-        console.log("Error: " + error)
-      }
-    );
+    this._CartService.getProducts().subscribe((res) => {
+      this.totalCartPro = res.length;
+    });
 
-    this._WishlistService.getProducts().subscribe(
-      (res)=>{
-        this.totalWishlistPro = res.length;
-      },
-      (error)=>{
-        console.log("Error: " + error)
-      }
-    );
+    this._WishlistService.getProducts().subscribe((res) => {
+      this.totalWishlistPro = res.length;
+    });
   }
-
 }

@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -13,8 +12,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private _AuthService: AuthService,
     private _Router: Router,
-    private _NgxSpinnerService: NgxSpinnerService
-  ) { this._NgxSpinnerService.show();}
+  ) {}
 
   registerForm: FormGroup = new FormGroup({
     name: new FormControl(null, [Validators.required]),
@@ -33,14 +31,12 @@ export class RegisterComponent implements OnInit {
         }
       },
       (error) => {
+        console.log(error);
         sweetAlertError(error.error.message);
       }
     );
   }
 
   ngOnInit(): void {
-    setTimeout(()=>{
-      this._NgxSpinnerService.hide();
-    },1500)
   }
 }

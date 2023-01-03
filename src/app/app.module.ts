@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { NgxSpinnerModule } from "ngx-spinner";
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -19,8 +19,10 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
-import { SwiperModule } from "swiper/angular";
+import { SwiperModule } from 'swiper/angular';
 import { PipesModule } from 'src/pipes/pipes.module';
+import { LoadInterceptor } from './core/interceptors/load.interceptor';
+import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,9 +49,19 @@ import { PipesModule } from 'src/pipes/pipes.module';
     NgbModule,
     SwiperModule,
     PipesModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadInterceptor,
+      multi: true,
+    },{
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
