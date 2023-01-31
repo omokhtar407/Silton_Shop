@@ -4,7 +4,9 @@ import { WishlistService } from './../../services/wishlist.service';
 import { CartServicesService } from './../../services/cart-services.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { Product } from 'src/model/product';
+import { Product1 } from 'src/model/product';
+import SwiperCore,{ Navigation} from 'swiper';
+SwiperCore.use([Navigation]);
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -12,8 +14,10 @@ import { Product } from 'src/model/product';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  trendingProducts: Product[] = [];
-  bestSellerProducts: Product[] = [];
+
+
+  trendingProducts: Product1[] = [];
+  bestSellerProducts: Product1[] = [];
 
   constructor(
     private _WishlistService: WishlistService,
@@ -46,11 +50,12 @@ export class HomeComponent implements OnInit {
     },
   };
 
-  addToCart(pro: Product) {
+  addToCart(pro: Product1) {
+
     this._CartServices.addToCart(pro);
   }
 
-  addToWishlist(pro: Product, event: any) {
+  addToWishlist(pro: Product1, event: any) {
     let heart = event.target;
     heart.classList.add('heart_active');
     this._WishlistService.addToWishlist(pro);
@@ -59,26 +64,19 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this._ActivatedRoute.data.subscribe((response: any) => {
       if (response.products != `No data`) {
-        // Trending Products
-        this.trendingProducts = response.products
-          .slice(0, 25)
-          .filter((pro: Product) => {
-            return pro.category.name != 'Others';
-          });
-        this.trendingProducts.forEach((pro: Product) => {
+
+        response.products.forEach((pro: Product1) => {
           Object.assign(pro, { quantity: 1, total: pro.price }); // add two properties to product
         });
+
+        // Trending Products
+          this.trendingProducts = response.products.slice(0, 10);
         // End
+
         // BestSeller Products
-        this.bestSellerProducts = response.products
-          .slice(25, 45)
-          .filter((pro: Product) => {
-            return pro.category.name != 'Others';
-        });
-        this.bestSellerProducts.forEach((pro: Product) => {
-          Object.assign(pro, { quantity: 1, total: pro.price });
-        });
+          this.bestSellerProducts = response.products.slice(10,20)
         // End
+
       } else {
         sweetAlertError('No Products Available Now');
       }

@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { WishlistService } from './../../services/wishlist.service';
 import { CartServicesService } from './../../services/cart-services.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Product } from 'src/model/product';
+import { Product1 } from 'src/model/product';
 
 @Component({
   selector: 'app-shop',
@@ -12,18 +12,18 @@ import { Product } from 'src/model/product';
   encapsulation: ViewEncapsulation.None,
 })
 export class ShopComponent implements OnInit {
-  Products: Product[] = [];
+  Products: Product1[] = [];
   constructor(
     private _CartServices: CartServicesService,
     private _WishlistService: WishlistService,
     private _ActivatedRoute: ActivatedRoute
   ) {}
 
-  addToCart(pro: Product) {
+  addToCart(pro: Product1) {
     this._CartServices.addToCart(pro);
   }
 
-  addToWishlist(pro: Product, event: any) {
+  addToWishlist(pro: Product1, event: any) {
     let heart = event.target;
     heart.classList.add('heart_active');
     this._WishlistService.addToWishlist(pro);
@@ -32,15 +32,13 @@ export class ShopComponent implements OnInit {
   ngOnInit(): void {
     this._ActivatedRoute.data.subscribe((response: any) => {
       if (response.products != `No data`) {
-        // Get Products
-        this.Products = response.products
-          .slice(0, 30)
-          .filter((pro: Product) => {
-            return pro.category.name != 'Others';
-          });
-        this.Products.forEach((pro: Product) => {
+
+        response.products.forEach((pro: Product1) => {
           Object.assign(pro, { quantity: 1, total: pro.price });
         });
+
+        // Get Products
+          this.Products = response.products.slice(0);
         // End
       } else {
         sweetAlertError('No Products Available Now');

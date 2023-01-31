@@ -1,4 +1,4 @@
-<section id="Electronics_pro" class="pad_top pb-5">
+<section id="Clothes_pro" class="pad_top pb-5">
   <div class="container">
     <div class="row g-4 justify-content-center">
       <div class="col-12">
@@ -6,10 +6,10 @@
           <div class="col-md-8">
             <div class="title">
               <h2>
-                Electronics
+                Women's Clothing
                 <small
-                  >SHOWING 1–{{ electronicsProducts.length - 1 }} OF
-                  {{ electronicsProducts.length }} RESULTS</small
+                  >SHOWING 1–{{ clothesProducts.length - 1 }} OF
+                  {{ clothesProducts.length }} RESULTS</small
                 >
               </h2>
               <span class="dash"></span>
@@ -35,7 +35,7 @@
         <div class="row g-4">
           <div
             class="col-lg-3 col-md-4 col-sm-6"
-            *ngFor="let product of electronicsProducts"
+            *ngFor="let product of clothesProducts"
             data-price=""
           >
             <div class="product">
@@ -61,7 +61,7 @@
                 </span>
                 <!-- <span class="image_placholder image_loaded shop-image">
                   <img
-                    [src]="product.images[1]"
+                    [src]="product.image"
                     [alt]="product.title"
                   />
                 </span> -->

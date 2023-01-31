@@ -1,17 +1,17 @@
 import { ProductResolverService } from './../../services/product-resolver.service';
-import { ClothesComponent } from './clothes/clothes.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ElectronicsComponent } from './electronics/electronics.component';
-import { ShoesComponent } from './shoes/shoes.component';
-import { FurnitureComponent } from './furniture/furniture.component';
+import { MenClothesComponent } from './men-clothes/men-clothes.component';
+import { WomenClothesComponent } from './women-clothes/women-clothes.component';
+import { JeweleryComponent } from './jewelery/jewelery.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'clothes', pathMatch: 'full' },
-  { path: 'clothes', component: ClothesComponent  , resolve: { products: ProductResolverService } },
-  { path: 'electronics',  component: ElectronicsComponent  , resolve: { products: ProductResolverService }},
-  { path: 'shoes',  component: ShoesComponent  , resolve: { products: ProductResolverService } },
-  { path: 'furniture', component: FurnitureComponent  , resolve: { products: ProductResolverService }},
+  { path: ``, redirectTo: `men's clothing`, pathMatch: `full` },
+  { path: `men's clothing`, component: MenClothesComponent  , resolve: { products: ProductResolverService } },
+  { path: `women's clothing`, component: WomenClothesComponent  , resolve: { products: ProductResolverService } },
+  { path: `electronics`,  component: ElectronicsComponent  , resolve: { products: ProductResolverService }},
+  { path: `jewelery`,  component: JeweleryComponent  , resolve: { products: ProductResolverService }},
 ];
 
 @NgModule({

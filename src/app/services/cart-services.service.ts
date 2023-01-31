@@ -2,13 +2,13 @@ import { sweetAlertSuccess } from 'src/sweetalert';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Product } from 'src/model/product';
+import { Product1 } from 'src/model/product';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartServicesService {
-  cartItemList: Product[] = [];
+  cartItemList: Product1[] = [];
   productList = new BehaviorSubject<any>([]);
 
   constructor(private _Router: Router) {
@@ -22,7 +22,7 @@ export class CartServicesService {
     return this.productList;
   }
 
-  setProduct(pro: Product) {
+  setProduct(pro: Product1) {
     this.cartItemList.push(pro);
     this.productList.next(pro);
   }
@@ -67,15 +67,15 @@ export class CartServicesService {
 
   getTotalPrice(): number {
     let grandTotal = 0;
-    this.cartItemList.map((pro: Product) => {
+    this.cartItemList.map((pro: Product1) => {
       grandTotal += pro.total;
     });
 
     return grandTotal;
   }
 
-  removeCartItem(pro: Product) {
-    this.cartItemList.map((pr: Product, index: number) => {
+  removeCartItem(pro: Product1) {
+    this.cartItemList.map((pr: Product1, index: number) => {
       if (pro.id === pr.id) {
         this.cartItemList.splice(index, 1);
         localStorage.setItem('cart', JSON.stringify(this.cartItemList));

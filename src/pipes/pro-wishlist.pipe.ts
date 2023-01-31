@@ -1,11 +1,11 @@
-import { Product } from 'src/model/product';
+import { Product1 } from 'src/model/product';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'proWishlist',
 })
 export class ProWishlistPipe implements PipeTransform {
-  wishlistArray: Product[] = [];
+  wishlistArray: Product1[] = [];
   id: number = 0;
   transform(value: string): number {
     this.wishlistArray =

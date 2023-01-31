@@ -1,13 +1,13 @@
-import { sweetAlertSuccess } from 'src/sweetalert';
+import { sweetAlertError, sweetAlertSuccess } from 'src/sweetalert';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Product } from 'src/model/product';
+import { Product1 } from 'src/model/product';
 @Injectable({
   providedIn: 'root',
 })
 export class WishlistService {
-  wishlistItems: Product[] = [];
+  wishlistItems: Product1[] = [];
   productList = new BehaviorSubject<any>([]);
 
   constructor(private _Router: Router) {
@@ -27,19 +27,34 @@ export class WishlistService {
     this.productList.next(pro);
   }
 
-  addToWishlist(...pro: any) {
+  addToWishlist(pro: any) {
     if (localStorage.getItem('userToken') != null) {
-      this.wishlistItems.push(...pro);
+      
+      if(this.wishlistItems.length){
+        let checkPro = this.wishlistItems.findIndex(pr => pr.id === pro.id) > -1;
+          if(checkPro){
+            sweetAlertError('Product Already Exist in Wishlist');
+          }
+          else{
+            this.wishlistItems.push(pro);
+            sweetAlertSuccess('Product Added to Wishlist');
+          }
+      }
+      else{
+        this.wishlistItems.push(pro);
+        sweetAlertSuccess('Product Added to Wishlist');
+      }
+
       localStorage.setItem('wishlistHeart', JSON.stringify(this.wishlistItems));
       this.productList.next(this.wishlistItems);
-      sweetAlertSuccess('Product Added to Wishlist');
+
     } else {
       this._Router.navigate(['login']);
     }
   }
 
-  removeItemFromWish(pro: Product) {
-    this.wishlistItems.map((pr: Product, index: number) => {
+  removeItemFromWish(pro: Product1) {
+    this.wishlistItems.map((pr: Product1, index: number) => {
       if (pro.id === pr.id) {
         this.wishlistItems.splice(index, 1);
         localStorage.setItem(

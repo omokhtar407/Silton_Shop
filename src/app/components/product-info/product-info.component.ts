@@ -3,7 +3,10 @@ import { CartServicesService } from './../../services/cart-services.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { Product } from 'src/model/product';
+import { Product1 } from 'src/model/product';
+import SwiperCore,{ Navigation} from 'swiper';
+SwiperCore.use([Navigation]);
+
 @Component({
   selector: 'app-product-info',
   templateUrl: './product-info.component.html',
@@ -11,21 +14,17 @@ import { Product } from 'src/model/product';
 })
 export class ProductInfoComponent implements OnInit {
   productId: number = 0;
-  product: Product = {
-    category: {
-      id: 0,
-      image: '',
-      name: '',
-    },
+  product: Product1 = {
+    category:'',
     description: '',
     id: '',
-    images: [],
+    image: '',
     price: 0,
     quantity: 0,
     title: '',
     total: 0,
   };
-  products: Product[] = [];
+  products: Product1[] = [];
 
   constructor(
     private _ActivatedRoute: ActivatedRoute,
@@ -62,34 +61,34 @@ export class ProductInfoComponent implements OnInit {
     this._ActivatedRoute.data.subscribe((response: any) => {
       this.product = response.product;
       Object.assign(this.product, { quantity: 1, total: this.product.price });
-      this.getRelatedProducts(this.product.category.name);
+      this.getRelatedProducts(this.product.category);
     });
   }
 
   getRelatedProducts(cateName: string) {
     this._ActivatedRoute.data.subscribe((response: any) => {
-      this.products = response.products.slice(0, 25).filter((pro: Product) => {
-        return pro.category.name === cateName;
+      this.products = response.products.slice(0, 19).filter((pro: Product1) => {
+        return pro.category === cateName;
       });
 
-      this.products.forEach((pro: Product) => {
+      this.products.forEach((pro: Product1) => {
         Object.assign(pro, { quantity: 1, total: pro.price });
       });
 
     });
   }
 
-  addToCart(pro: Product) {
+  addToCart(pro: Product1) {
     this._CartService.addToCart(pro);
   }
 
   //this function For product button
-  addToWishlist(pro: Product) {
+  addToWishlist(pro: Product1) {
     this._WishlistService.addToWishlist(pro);
   }
 
   // this function for related products
-  addToWishlist2(pro: Product, event: any) {
+  addToWishlist2(pro: Product1, event: any) {
     let heart = event.target;
     heart.classList.add('heart_active');
     this._WishlistService.addToWishlist(pro);

@@ -8,12 +8,12 @@ import {
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductResolverService implements Resolve<Observable<any>> {
-  productsUrl: string = `https://api.escuelajs.co/api/v1/products/`;
   constructor(private _HttpClient: HttpClient) {}
   resolve(
     route: ActivatedRouteSnapshot,
@@ -21,7 +21,8 @@ export class ProductResolverService implements Resolve<Observable<any>> {
   ): Observable<any> | Observable<Observable<any>> | Promise<Observable<any>> {
     // console.log('Called Get Product in resolver...', route);
 
-    return this._HttpClient.get(this.productsUrl).pipe(
+    return this._HttpClient.get(environment.baseUrl)
+    .pipe(
       catchError((error) => {
         sweetAlertError("No Data Found");
         return of('No data');

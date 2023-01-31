@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/model/product';
+import { Product1 } from 'src/model/product';
 import { CartServicesService } from './../../services/cart-services.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
@@ -8,12 +8,12 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  products:Product[]= [];
+  products:Product1[]= [];
   grandTotal:number = 0;
 
   constructor(private _CartService:CartServicesService,private _NgxSpinnerService: NgxSpinnerService) { }
 
-  removeProduct(pro:Product){
+  removeProduct(pro:Product1){
     this._CartService.removeCartItem(pro)
   }
 

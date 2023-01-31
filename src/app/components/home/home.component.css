@@ -1,4 +1,9 @@
+
+
 /* Start pro_Categories */
+#pro_Categories{
+  background-color: #f7f7f7;
+}
 .category{
   position: relative;
   overflow: hidden;
@@ -15,17 +20,17 @@
   -ms-transition: transform 0.4s;
   -o-transition: transform 0.4s;
 }
-.clothes{
+.women{
   background-image: url("../../../assets/imgs/clothes.jpg");
 }
-.shoes{
-  background-image: url("../../../assets/imgs/shoes.jpg");
+.men{
+  background-image: url("../../../assets/imgs/slide.png");
 }
 .electronics{
   background-image: url("../../../assets/imgs/Electronics.jpg");
 }
-.furniture{
-  background-image: url("../../../assets/imgs/furniture.jpg");
+.jewelery{
+  background-image: url("../../../assets/imgs/Jewelery.jpg");
 }
 #pro_Categories .col-lg-3:hover .category_bg{
   transform: scale(1.1);
@@ -71,4 +76,3 @@
   color: var(--whiteColor);
 }
 /* End pro_Categories  */
-

@@ -98,6 +98,7 @@ h2 small{
   position: relative;
   padding: 2px 20px;
   display: block;
+  text-align: center;
   text-transform: uppercase;
 }
 
@@ -159,12 +160,19 @@ h2 small{
     display: block;
     overflow: hidden;
     width: 100%;
-    height: 350px;
+    height: 300px;
   }
-  .pro-img .image_placholder,
-  .pro-img img{
+  .pro-img .image_placholder{
     width: 100%;
     height: 100%;
+  }
+  .pro-img img{
+    position: absolute;
+    width: 200px !important;
+    height: 200px !important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
   }
   .pro-img .image_loaded,.wishlist{
     position: absolute;
@@ -178,15 +186,17 @@ h2 small{
   }
     /* Start wishlist */
     .wishlist{
-      width: 50px;
-      height: 50px;
+      width: 30px;
+      height: 30px;
       display: flex;
       justify-content: center;
       align-items: center;
       z-index: 12;
+      background-color: #7b599b96;
+      border-radius: 50%;
     }
     .wishlist .fa-heart{
-      font-size: 18px;
+      font-size: 15px;
       color: var(--whiteColor);
       transition: all 0.3s;
       -webkit-transition: all 0.3s;
@@ -242,8 +252,36 @@ h2 small{
   }
   /* End product info */
 /* End Product */
+/* Start mySwiper_for_all*/
+  .mySwiper_trending{background-color: transparent !important;}
+
+  .mySwiper_trending .swiper-slide {
+    display: block !important;
+  }
+
+  .mySwiper_trending .swiper-slide img {
+    height: 80% !important;
+  }
+
+  .mySwiper_trending .swiper-button-next,
+  .mySwiper_trending .swiper-button-prev {
+    color: var(--first-color);
+    background-color: var(--first-color) !important;
+    width: 40px;
+    height: 40px;
+    border-radius: 50% !important;
+  }
+
+  .mySwiper_trending .swiper-button-next:after,
+  .mySwiper_trending .swiper-button-prev:after {
+    color: var(--whiteColor);
+    font-size: 16px;
+    font-weight: bold ;
+  }
+/* End mySwiper_for_all*/
+
 /* Start owl-carousel */
- .owl-carousel, .owl-carousel .owl-item{
+ /* .owl-carousel, .owl-carousel .owl-item{
   position:initial;
 }
  .owl-prev, .owl-next{
@@ -284,7 +322,7 @@ h2 small{
    .owl-next{
     display: none;
   }
-}
+} */
 /*End owl-carouse */
 /* Start Sorting button */
 .sorting .btn{

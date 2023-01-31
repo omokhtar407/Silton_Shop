@@ -8,12 +8,12 @@ import {
 } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { sweetAlertError } from 'src/sweetalert';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductInfoResolverService {
-  singProductUrl: string = `https://api.escuelajs.co/api/v1/products/`;
   productId: number = 0;
   constructor(
     private _HttpClient: HttpClient,
@@ -27,7 +27,7 @@ export class ProductInfoResolverService {
 
     this.productId = route.params.id;
 
-    return this._HttpClient.get(this.singProductUrl + this.productId).pipe(
+    return this._HttpClient.get(environment.baseUrl + this.productId).pipe(
       catchError((error) => {
         sweetAlertError("No Data Found")
         return of('No data');
