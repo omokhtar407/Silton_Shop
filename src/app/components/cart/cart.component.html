@@ -15,19 +15,20 @@
 
       <div *ngIf="products.length" class="col-12 position-relative">
         <div class="container">
-          <div class="row g-4 overflow-auto p-3">
+          <div class="row g-3 overflow-auto p-3">
             <table class="table table-responsive align-middle ">
               <thead>
                 <tr>
                   <th></th>
                   <th>PRODUCT</th>
+                  <th>Price</th>
                   <th>QUANTITY</th>
-                  <th>SUBTOTAL</th>
+                  <th>TOTAL</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
-                <tr  *ngFor="let product of products">
+                <tr  *ngFor="let product of products ;let index = index">
                   <td>
                     <a class="pro_img" [routerLink]="['/product-info', product.id]">
                       <img
@@ -39,22 +40,36 @@
                   <td>
                     <span ><a class="pro_name" [routerLink]="['/product-info', product.id]">{{product.title}}</a></span>
                   </td>
-                  <td class="pro_quantity">{{product.quantity}}</td>
-                  <td class="pro_price" >$ {{product.price}}</td>
+                  <td class="pro_price" >{{product.price}} $</td>
+                  <td class="pro_quantity">
+                    <div class="d-flex justify-content-start align-items-center">
+                      <div class="plus m-1 btn btn-dark rounded-0 fs-5 fw-bold" (click)="plusProduct(index)">+</div>
+                      <input class="mx-2 form-control rounded-0" type="number" (change)="detectProQ()" [(ngModel)]="product.quantity" min="1">
+                      <div class="mins m-1 btn btn-dark rounded-0 fs-5 fw-bold" (click)="minsProduct(index)">-</div>
+                    </div>
+                  </td>
+
+                  <td class="pro_price" >{{product.price * product.quantity}} $</td>
                   <td class="pro_tools" >
                     <button class="btn" (click)="removeProduct(product); ">delete</button>
                   </td>
                 </tr>
                 <tr>
-                  <td class="cart_total" colspan="5">
+                  <td class="cart_total" colspan="6">
                     Cart Total:- <strong>$ {{grandTotal}}</strong>
                   </td>
                 </tr>
               </tbody>
             </table>
 
-            <div class="delete_cart_pro">
-              <button class="btn" (click)="removeAllProducts();">Delete All</button>
+            <div class="d-flex justify-content-end">
+              <div class="add__cart m-1">
+                <button class="btn" (click)="addCart();">Create Order</button>
+              </div>
+              <div class="delete_cart_pro m-1">
+                <button class="btn" (click)="removeAllProducts();">Clear Cart</button>
+              </div>
+
             </div>
           </div>
         </div>

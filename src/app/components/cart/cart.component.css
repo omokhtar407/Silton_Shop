@@ -1,5 +1,5 @@
 .table{
-  min-width: 600px;
+  min-width: 800px;
 }
 .table th{
   font-weight: 400;
@@ -32,11 +32,17 @@
   font-size: 20px;
   color: var(--first-color);
 }
+.table .pro_quantity input{width: 60px;}
+.form-control:focus{
+  border-color: var(--four-color) !important;
+  box-shadow: 0 0 0 0.25rem var(--four-color-50) !important;
+}
 .table .cart_total{
   text-align: end;
 }
 .table .pro_tools .btn,
 .delete_cart_pro .btn,
+.add__cart .btn,
 .empty_cart .btn{
   border-radius: 0;
   text-transform: uppercase;
@@ -49,12 +55,9 @@
   -ms-transition: all 0.4s;
   -o-transition: all 0.4s;
 }
-.delete_cart_pro{
-  display: flex;
-  justify-content: end;
-}
 .table .pro_tools .btn:hover,
 .delete_cart_pro .btn:hover,
+.add__cart .btn:hover,
 .empty_cart .btn:hover
 {
   color: var(--four-color) !important;
